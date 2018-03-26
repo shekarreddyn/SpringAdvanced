@@ -1,12 +1,24 @@
 package hello;
+import java.util.*;
+
 
 public class Car {
 
     private String carName;
     private Integer makeYear;
     private Integer engineCapacity;
+    private List<String> components;
+
+    public List<String> getComponents() {
+        return components;
+    }
+
+    public void setComponents(List<String> components) {
+        this.components = components;
+    }
 
     public String getCarName() {
+
         return carName;
     }
 
