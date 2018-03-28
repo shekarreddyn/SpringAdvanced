@@ -1,0 +1,5 @@
+1. In the example given return only an employee with name Shekar
+
+2. Return all the employees with age > 22
+
+3. Print the unique employee names from coming company object   (print on console)

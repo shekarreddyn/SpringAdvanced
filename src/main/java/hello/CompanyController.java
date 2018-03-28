@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyController {
 
     @RequestMapping(value = "/getCompany", method = RequestMethod.POST)
-    public String getCompany(@RequestBody Company company){
+    public Company getCompany(@RequestBody Company company){
 
         System.out.println(company.getCompanyName());
 
-        return "Success";
+        return company;
     }
 
 }
