@@ -38,14 +38,14 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/getEmployeeByAge", method = RequestMethod.POST)
-    public List<Employee> getEmployeeBasedOnAge(@RequestBody Company company){
+    public List<Employee> getEmployeeBasedOnAge(@RequestBody Company company) {
 
         List<Employee> employeeList = company.getEmployeeList();
         List<Employee> empAgeList = new ArrayList<Employee>();
 
-        for(Employee employee:employeeList){
+        for (Employee employee : employeeList) {
 
-            if(employee.getAge()>22){
+            if (employee.getAge() > 22) {
 
                 empAgeList.add(employee);
 
@@ -54,5 +54,19 @@ public class CompanyController {
         return empAgeList;
     }
 
+    @RequestMapping(value = "/uniqueNames", method = RequestMethod.POST)
+    public List<Employee> getUniqueNames(@RequestBody Company company) {
+        Set<String> employeeSet = new HashSet<String>();
+        List<Employee> employeeList = company.getEmployeeList();
 
+        for (Employee employee : employeeList) {
+            employeeSet.add(employee.getEmployeeName());
+        }
+        for (String uniqueNameSet : employeeSet) {
+
+            System.out.println(uniqueNameSet);
+        }
+
+        return employeeList;
+    }
 }
