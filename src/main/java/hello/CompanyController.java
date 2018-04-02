@@ -69,4 +69,39 @@ public class CompanyController {
 
         return employeeList;
     }
+
+
+    @RequestMapping(value="/sumOfEmployeesSalary", method = RequestMethod.POST)
+    public int sumOfEmployeesSalary(@RequestBody Employee employee){
+
+
+                List<Employee> empAgeList = new ArrayList<Employee>();
+
+        int sumOfEmployeesSalary = 0;
+
+        int a = employee.getSalary();
+
+        sumOfEmployeesSalary = a + sumOfEmployeesSalary;
+
+        return sumOfEmployeesSalary;
+    }
+
+
+
+// find the avg age of all employees
+    @RequestMapping(value="/sumOfEmployeesSalary", method = RequestMethod.POST)
+    public int avgAgeOfEmployees(@RequestBody Employee employee){
+
+        int avgAgeOfEmployees = 0;
+
+        int employeeAge[] = employee.getAge();
+
+        int a = employee.getSalary();
+
+        sumOfEmployeesSalary = a + sumOfEmployeesSalary;
+
+        return sumOfEmployeesSalary;
+    }
+
+
 }

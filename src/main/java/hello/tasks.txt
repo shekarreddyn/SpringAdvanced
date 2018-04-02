@@ -3,3 +3,6 @@
 2. Return all the employees with age > 22
 
 3. Print the unique employee names from coming company object   (print on console)
+
+4) find the sum of all employee salaries
+5) find the avg age of all employees?
