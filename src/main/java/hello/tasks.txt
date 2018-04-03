@@ -6,3 +6,8 @@
 
 4) find the sum of all employee salaries
 5) find the avg age of all employees?
+
+// find multiple names
+
+  find all the employees with names passed as parameter
+  find all the employees with names passed and salary range passed as parameter

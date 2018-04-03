@@ -1,9 +1,6 @@
 package hello;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -72,35 +69,64 @@ public class CompanyController {
 
 
     @RequestMapping(value="/sumOfEmployeesSalary", method = RequestMethod.POST)
-    public int sumOfEmployeesSalary(@RequestBody Employee employee){
+    public int sumOfEmployeesSalary(@RequestBody Company company) {
 
+        List<Employee> employeeList = company.getEmployeeList();
+        int sumOfSalary =0;
 
-                List<Employee> empAgeList = new ArrayList<Employee>();
+        for(Employee employeeDetails : employeeList){
 
-        int sumOfEmployeesSalary = 0;
+            sumOfSalary = sumOfSalary + employeeDetails.getSalary();
+        }
+        return sumOfSalary;
 
-        int a = employee.getSalary();
-
-        sumOfEmployeesSalary = a + sumOfEmployeesSalary;
-
-        return sumOfEmployeesSalary;
     }
+
 
 
 
 // find the avg age of all employees
     @RequestMapping(value="/sumOfEmployeesSalary", method = RequestMethod.POST)
-    public int avgAgeOfEmployees(@RequestBody Employee employee){
+    public int avgAgeOfEmployees(@RequestBody Company company){
 
+        int ageOfEmployees = 0;
         int avgAgeOfEmployees = 0;
 
-        int employeeAge[] = employee.getAge();
+        List<Employee> employeeList = company.getEmployeeList();
 
-        int a = employee.getSalary();
+        if(employeeList.size() > 0) {
 
-        sumOfEmployeesSalary = a + sumOfEmployeesSalary;
+            for (Employee employeeDetails : employeeList) {
 
-        return sumOfEmployeesSalary;
+                ageOfEmployees = ageOfEmployees + employeeDetails.getAge();
+            }
+
+            avgAgeOfEmployees = ageOfEmployees / employeeList.size();
+            return avgAgeOfEmployees;
+        }
+
+        else {
+            return 0;
+        }
+    }
+
+    @RequestMapping(value = "/getEmployeeByName", method = RequestMethod.POST)
+    public  Employee getEmployeeByName(@RequestBody Company company, @RequestParam("employeeName") String employeeName){
+
+        Employee resultEmployee = null;
+        List<Employee> employeeList = company.getEmployeeList();
+
+        for (Employee employeeDetails : employeeList) {
+
+            if(employeeDetails.getEmployeeName().equals(employeeName)){
+
+                resultEmployee = employeeDetails;
+                break;
+            }
+        }
+
+        return resultEmployee;
+
     }
 
 
