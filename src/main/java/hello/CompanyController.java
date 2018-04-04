@@ -86,7 +86,7 @@ public class CompanyController {
 
 
 // find the avg age of all employees
-    @RequestMapping(value="/sumOfEmployeesSalary", method = RequestMethod.POST)
+    @RequestMapping(value="/avgAgeOfEmployees", method = RequestMethod.POST)
     public int avgAgeOfEmployees(@RequestBody Company company){
 
         int ageOfEmployees = 0;
@@ -129,5 +129,47 @@ public class CompanyController {
 
     }
 
+    @RequestMapping(value = "/getEmployees", method = RequestMethod.POST)
+    public List<Employee> getEmployees(@RequestBody Company company , @RequestParam("employeeName") String employeeName) {
 
+        Employee resultEmployee = null;
+        List<Employee> employeeList = company.getEmployeeList();
+         List<Employee> sameEmployeeList = new ArrayList<Employee>();
+
+        for (Employee employeeDetails : employeeList) {
+
+            if(employeeDetails.getEmployeeName().equalsIgnoreCase(employeeName)){
+
+                sameEmployeeList.add(employeeDetails);
+
+            }
+        }
+        return sameEmployeeList;
+
+    }
+
+
+    @RequestMapping(value = "/getEmployeesBySalRange", method = RequestMethod.POST)
+    public List<Employee> getEmployeesBySalRange(@RequestBody Company company , @RequestParam("employeeName") String employeeName, @RequestParam("maxSalary") Integer maxSalary, @RequestParam("minSalary") Integer minSalary, @RequestHeader("authenticationToken") String authenticationToken) {
+
+        if (authenticationToken.equals("*#06#")) {
+            Employee resultEmployee = null;
+            List<Employee> employeeList = company.getEmployeeList();
+            List<Employee> sameEmployeeList = new ArrayList<Employee>();
+
+            for (Employee employeeDetails : employeeList) {
+
+                if (employeeDetails.getEmployeeName().equalsIgnoreCase(employeeName) && employeeDetails.getSalary() > minSalary && employeeDetails.getSalary() < maxSalary) {
+
+                    sameEmployeeList.add(employeeDetails);
+
+                }
+            }
+            return sameEmployeeList;
+
+        }
+        else {
+            return null;
+        }
+    }
 }
